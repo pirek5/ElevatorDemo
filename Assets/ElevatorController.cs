@@ -13,10 +13,15 @@ public class ElevatorController : MonoBehaviour
 
     
 
-    // Start is called before the first frame update
-    void Start()
+    void GoToFloor(int floor)
     {
-        
+        if(floor == currentFloor) { return; }
+        StartCoroutine(ElevatorMovement(elevator.position, floorPositions[floor]));
+    }
+
+    IEnumerator ElevatorMovement(Vector3 startPos, Vector3 endPos)
+    {
+        yield return null;
     }
 
     // Update is called once per frame

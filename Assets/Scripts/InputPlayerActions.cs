@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum State { movement, item };
+
 public class InputPlayerActions : MonoBehaviour
 {
+    //state
+    public State CurrentState { get; set; }
 
     //set in editor;
     [SerializeField] Transform head;
@@ -17,6 +21,11 @@ public class InputPlayerActions : MonoBehaviour
 
     //cached
     //private RaycastHit hit;
+
+    private void Awake()
+    {
+        CurrentState = State.movement;
+    }
 
     void Update()
     {
