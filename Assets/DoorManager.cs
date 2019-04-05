@@ -43,7 +43,8 @@ public class DoorManager : MonoBehaviour
     {
         foreach(var door in doorAnimators)
         {
-            door.SetTrigger("Open");
+            float t = 1f - door.GetCurrentAnimatorStateInfo(0).normalizedTime; //time of clip start
+            door.Play("Door Open", -1, Mathf.Clamp(t, 0f, 1f));
         }
         currentCoroutine = AutoCloseDoor();
         StartCoroutine(currentCoroutine);
@@ -51,11 +52,15 @@ public class DoorManager : MonoBehaviour
 
     public void CloseDoor()
     {
-        StopCoroutine(currentCoroutine); //if door closed by player disables autoclosing
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine); //if door closed by player disables autoclosing
+        }
 
         foreach (var door in doorAnimators)
         {
-            door.SetTrigger("Close");
+            float t = 1f - door.GetCurrentAnimatorStateInfo(0).normalizedTime; //time of clip start
+            door.Play("Door Close", -1, Mathf.Clamp(t, 0f, 1f));
         }
     }
 
