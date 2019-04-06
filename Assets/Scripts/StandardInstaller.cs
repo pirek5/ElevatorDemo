@@ -1,18 +1,22 @@
 using UnityEngine;
-using UnityStandardAssets.Characters.FirstPerson;
 using Zenject;
 
 public class StandardInstaller : MonoInstaller
 {
-    [SerializeField] private InputPlayerActions inputInstance;
-    [SerializeField] private FirstPersonController fpControllerInstance;
+    [SerializeField] private PlayerState playerStateInstance;
+    //[SerializeField] private FirstPersonController fpControllerInstance;
     [SerializeField] private ItemManager itemManager;
 
     public override void InstallBindings()
     {
-        Container.Bind<InputPlayerActions>().FromInstance(inputInstance).AsSingle();
-        Container.Bind<DoorController>().FromComponentInParents().AsSingle();
-        Container.Bind<FirstPersonController>().FromInstance(fpControllerInstance).AsSingle();
+        Container.Bind<PlayerState>().FromInstance(playerStateInstance).AsSingle();
+       // Container.Bind<FirstPersonController>().FromInstance(fpControllerInstance).AsSingle();
         Container.Bind<ItemManager>().FromInstance(itemManager).AsSingle();
+
+        Container.Bind<ElevatorDoorController>().FromComponentInParents().AsTransient().WhenInjectedInto<Photocell>();
+        Container.Bind<ElevatorDoorController>().FromComponentInChildren().AsTransient().WhenInjectedInto<ElevatorController>();
+        Container.Bind<ElevatorController>().FromComponentInParents();
+
+        Container.Bind<Animator>().FromComponentsInChildren().AsTransient().WhenInjectedInto<ElevatorDoorController>();
     }
 }

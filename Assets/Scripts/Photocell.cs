@@ -6,7 +6,7 @@ using Zenject;
 public class Photocell : MonoBehaviour
 {
     //dependencies
-    [Inject] private DoorController doorController;
+    [Inject] private ElevatorDoorController doorController;
 
     //state
     private bool photocellEnabled;
@@ -28,6 +28,11 @@ public class Photocell : MonoBehaviour
     public void DisablePhotocell()
     {
         photocellEnabled = false;
+    }
+
+    void Update()
+    {
+        print(photocellEnabled);
     }
     
 }

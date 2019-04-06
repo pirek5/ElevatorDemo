@@ -4,20 +4,21 @@ using UnityEngine;
 
 public enum State { movement, item };
 
-public class InputPlayerActions : MonoBehaviour
+public class PlayerState : MonoBehaviour
 {
-    //state
-    public State CurrentState { get; set; }
-
     //set in editor;
     [SerializeField] Transform head;
 
     //config
-    [SerializeField] private float actionsRange;
+    [SerializeField] private float actionsRange; //TODO dosent fit into the class
 
     //state
+    public State CurrentState { get; set; }
+    public bool inMovingElevator { get; set; }
     public bool Action { get; private set; }
+    public bool Cancel { get; private set; }
     public GameObject SelectedObject { get; private set; }
+
 
     //cached
     //private RaycastHit hit;
@@ -48,5 +49,6 @@ public class InputPlayerActions : MonoBehaviour
         }
 
         Action = Input.GetButtonDown("Fire1");
+        Cancel = Input.GetButtonDown("Cancel");
     }
 }

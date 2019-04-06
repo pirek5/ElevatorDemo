@@ -1,47 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-public class DoorController : MonoBehaviour
+public class ElevatorDoorController : MonoBehaviour
 {
     //config
     [SerializeField] private float autoCloseTime;
 
+    //dependencies
+    [Inject] private Animator[] doorAnimators;
+
     //cached
-    private Animator[] doorAnimators;
     private IEnumerator currentCoroutine;
 
-    //debug
-    public bool open = false;
-    public bool close = false;
-
-    void Awake()
+    public void Open()
     {
-        doorAnimators = GetComponentsInChildren<Animator>();
-        if (doorAnimators == null)
-        {
-            Debug.LogError("door animators cant be assigned!");
-        }
-    }
-
-    private void Update()
-    {
-        if (open)
-        {
-            open = false;
-            OpenDoor();
-        }
-
-        if (close)
-        {
-            close = false;
-            CloseDoor();
-        }
-    }
-
-    public void OpenDoor()
-    {
-        if (doorAnimators[0].GetCurrentAnimatorStateInfo(0).IsName("Door Open")) { return; } // doors already opening
+        //do not proceed if doors already opening or opened
+        if (doorAnimators[0].GetCurrentAnimatorStateInfo(0).IsName("Door Open")) { return; } 
 
         foreach (var door in doorAnimators)
         {
@@ -52,14 +28,14 @@ public class DoorController : MonoBehaviour
         StartCoroutine(currentCoroutine);
     }
 
-    public void CloseDoor()
+    public void Close()
     {
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine); //if door closed by player disables autoclosing
         }
 
-        if(doorAnimators[0].GetCurrentAnimatorStateInfo(0).IsName("Door Close")) { return; } // doors already closing
+        if(doorAnimators[0].GetCurrentAnimatorStateInfo(0).IsName("Door Close")) { return; } // doors already closing or closed
 
         foreach (var door in doorAnimators)
         {
@@ -72,7 +48,7 @@ public class DoorController : MonoBehaviour
     {
         if (doorAnimators[0].GetCurrentAnimatorStateInfo(0).IsName("Door Close"))
         {
-            OpenDoor();
+            Open();
         } 
     }
 
@@ -84,6 +60,6 @@ public class DoorController : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        CloseDoor();
+        Close();
     }
 }

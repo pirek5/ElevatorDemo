@@ -14,7 +14,7 @@ public class FlashingObject : MonoBehaviour {
     private MeshRenderer meshRenderer;
 
     //dependencies
-    [Inject] InputPlayerActions input;
+    [Inject] PlayerState input;
 
     //state
     private bool isFlashing;

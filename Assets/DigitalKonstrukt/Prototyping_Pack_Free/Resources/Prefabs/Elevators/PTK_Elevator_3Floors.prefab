@@ -31,7 +31,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384305417}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.97}
+  m_LocalPosition: {x: 0, y: 0, z: 0.932}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 4551404754655040}
@@ -39,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.1, y: 1.052}
+  m_AnchoredPosition: {x: 1.133, y: 1.052}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &1384305421
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5fb22255f1a0847a2ed5599d09bcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 747574842}
+  thisFloor: 0
 --- !u!222 &7454166412501204051
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -524,6 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bec0fd0bd12c7c488626a2a4134daec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  elevatorSpeed: 10
   elevator: {fileID: 4336349914575674}
   floorPositions:
   - {x: 0, y: 0, z: 0}
@@ -962,7 +963,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1409557393561477452}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3118968482306246145}
+        m_MethodName: GoToFloor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1082807768852577154
@@ -1080,7 +1092,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7246181976229430341}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3118968482306246145}
+        m_MethodName: OpenElevatorDoors
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &1416560555359283872
@@ -1211,7 +1234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1602308636084461459}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 4.977, z: 0.97}
+  m_LocalPosition: {x: 1.133, y: 4.977, z: 0.97}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 4551404754655040}
@@ -1301,7 +1324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5fb22255f1a0847a2ed5599d09bcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 747574842}
+  thisFloor: 0
 --- !u!1 &1703712149361530658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,7 +1440,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8083557790076167393}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3118968482306246145}
+        m_MethodName: GoToFloor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &3002286822278340255
@@ -1611,7 +1645,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4235168754140248534}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3118968482306246145}
+        m_MethodName: GoToFloor
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &5413147469503862244
@@ -1729,7 +1774,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 719472028707761120}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3118968482306246145}
+        m_MethodName: CloseElevatorDoors
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &5613312466961657715
@@ -2255,7 +2311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7921904829522352851}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 3.032, z: 0.97}
+  m_LocalPosition: {x: 1.133, y: 3.032, z: 0.97}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 4551404754655040}
@@ -2345,7 +2401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5fb22255f1a0847a2ed5599d09bcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 747574842}
+  thisFloor: 0
 --- !u!1 &8626602456844864595
 GameObject:
   m_ObjectHideFlags: 0

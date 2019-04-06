@@ -6,35 +6,36 @@ using Zenject;
 public class PlayerActions : MonoBehaviour
 {
     //dependencies
-    [Inject] InputPlayerActions input;
+    [Inject] PlayerState playerState;
+    [Inject] ItemManager itemManager;
 
     void Update()
     {
-        if(input.SelectedObject == null) { return; }
-
-        if(input.CurrentState == State.movement)
+        if(playerState.SelectedObject != null && playerState.CurrentState == State.movement)
         {
             MovementActions();
         }
-        else if (input.CurrentState == State.item)
+        else if (playerState.CurrentState == State.item)
         {
             ItemActions();
         }
-
     }
 
     private void MovementActions()
     {
-        if (input.Action && input.SelectedObject.GetComponent(typeof(IButton)))
+        if (playerState.Action && playerState.SelectedObject.GetComponent(typeof(IButton)))
         {
-            var button = input.SelectedObject.GetComponent(typeof(IButton)) as IButton;
+            var button = playerState.SelectedObject.GetComponent(typeof(IButton)) as IButton;
             button.EnableButton();
         }
     }
 
     private void ItemActions()
     {
-        // possibility to cancel
+        if (playerState.Cancel)
+        {
+            itemManager.PutAwayItem();
+        }
     }
 
 }

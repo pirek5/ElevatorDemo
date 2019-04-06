@@ -10,8 +10,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private GameObject hud;
 
     //dependencies
-    [Inject] FirstPersonController fpsController;
-    [Inject] InputPlayerActions inputPlayerActions;
+    
+    [Inject] PlayerState playerState;
 
     public GameObject currentItem;
 
@@ -19,10 +19,10 @@ public class ItemManager : MonoBehaviour
     {
         currentItem = item;
         item.SetActive(true);
-        inputPlayerActions.CurrentState = State.item;
-        fpsController.enabled = false;
+        playerState.CurrentState = State.item;
         hud.SetActive(false);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void PutAwayItem()
@@ -31,9 +31,9 @@ public class ItemManager : MonoBehaviour
 
         currentItem.SetActive(false);
         currentItem = null;
-        inputPlayerActions.CurrentState = State.movement;
-        fpsController.enabled = true;
+        playerState.CurrentState = State.movement;
         hud.SetActive(true);
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
