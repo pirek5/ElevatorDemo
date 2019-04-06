@@ -24,6 +24,7 @@ public class ElevatorController : MonoBehaviour
     [Inject] private FirstPersonController firstPersonController;
     [Inject] private ElevatorDoorController elevatorDoorController;
     [Inject] private PlayerState playerState;
+    [Inject] ElevatorSounds elevatorSounds;
 
     public void GoToFloor(int floor)
     {
@@ -52,13 +53,14 @@ public class ElevatorController : MonoBehaviour
             firstPersonController.InMovingElevator = true;
             player.SetParent(elevator);
         }
-        
+        elevatorSounds.PlayElevatorRide();
         while (fractionOfJourney < 1)
         {
             fractionOfJourney += Time.deltaTime * elevatorSpeed / distance;
             elevator.localPosition = Vector3.Lerp(currentPosition, endPos, fractionOfJourney);
             yield return null;
         }
+        elevatorSounds.PlayBoing();
         
         if (playerState.IsInElevator)
         {
