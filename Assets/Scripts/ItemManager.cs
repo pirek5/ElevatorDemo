@@ -10,13 +10,14 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private GameObject hud;
 
     //dependencies
-    
+    [Inject] private FirstPersonController firstPersonController;
     [Inject] PlayerState playerState;
 
     public GameObject currentItem;
 
     public void ShowItem(GameObject item)
     {
+        firstPersonController.enabled = false;
         currentItem = item;
         item.SetActive(true);
         playerState.CurrentState = State.item;
@@ -29,6 +30,7 @@ public class ItemManager : MonoBehaviour
     {
         if(currentItem == null) { return; }
 
+        firstPersonController.enabled = true;
         currentItem.SetActive(false);
         currentItem = null;
         playerState.CurrentState = State.movement;

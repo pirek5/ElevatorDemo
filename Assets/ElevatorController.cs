@@ -16,16 +16,17 @@ public class ElevatorController : MonoBehaviour
     [SerializeField] private Vector3[] floorPositions;
 
     //state
-    int currentFloor;
+    public int CurrentFloor { get; private set; }
     public bool IsMoving { get; private set; }
 
     //dependencies
+    [Inject] private FirstPersonController firstPersonController;
     [Inject] private ElevatorDoorController elevatorDoorController;
-    [Inject] private PlayerState playerState;
 
     public void GoToFloor(int floor)
     {
-        if(floor == currentFloor || IsMoving) { return; }
+        print("pushed");
+        if(floor == CurrentFloor || IsMoving) { return; }
 
         CloseElevatorDoors();
         StartCoroutine(ElevatorMovement(elevator.localPosition, floorPositions[floor], floor));
@@ -45,7 +46,7 @@ public class ElevatorController : MonoBehaviour
         var currentPosition = startPos;
         var fractionOfJourney = 0f;
 
-        playerState.inMovingElevator = true;
+        firstPersonController.InMovingElevator = true;
         player.SetParent(elevator);
         while (fractionOfJourney < 1)
         {
@@ -53,19 +54,19 @@ public class ElevatorController : MonoBehaviour
             elevator.localPosition = Vector3.Lerp(currentPosition, endPos, fractionOfJourney);
             yield return null;
         }
-        playerState.inMovingElevator = false;
+        firstPersonController.InMovingElevator = false;
         player.SetParent(null);
         //MovingUp = false;
 
         
-        currentFloor = floor;
+        CurrentFloor = floor;
         IsMoving = false;
         OpenElevatorDoors();
     }
 
     public void CallElevator(int floor)
     {
-        if(floor == currentFloor)
+        if(floor == CurrentFloor)
         {
             elevatorDoorController.Open();
         }

@@ -29,10 +29,5 @@ public class Photocell : MonoBehaviour
     {
         photocellEnabled = false;
     }
-
-    void Update()
-    {
-        print(photocellEnabled);
-    }
     
 }

@@ -14,7 +14,6 @@ public class PlayerState : MonoBehaviour
 
     //state
     public State CurrentState { get; set; }
-    public bool inMovingElevator { get; set; }
     public bool Action { get; private set; }
     public bool Cancel { get; private set; }
     public GameObject SelectedObject { get; private set; }
