@@ -16,6 +16,7 @@ public class PlayerState : MonoBehaviour
     public State CurrentState { get; set; }
     public bool Action { get; private set; }
     public bool Cancel { get; private set; }
+    public bool IsInElevator { get; private set; }
     public GameObject SelectedObject { get; private set; }
 
 
@@ -49,5 +50,23 @@ public class PlayerState : MonoBehaviour
 
         Action = Input.GetButtonDown("Fire1");
         Cancel = Input.GetButtonDown("Cancel");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("elevator"))
+        {
+            print("player in elevator");
+            IsInElevator = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("elevator"))
+        {
+            print("player outside elevator");
+            IsInElevator = false;
+        }
     }
 }

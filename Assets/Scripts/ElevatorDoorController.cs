@@ -44,14 +44,6 @@ public class ElevatorDoorController : MonoBehaviour
         }
     }
 
-    public void AutoOpenDoor()
-    {
-        if (doorAnimators[0].GetCurrentAnimatorStateInfo(0).IsName("Door Close"))
-        {
-            Open();
-        } 
-    }
-
     private IEnumerator AutoCloseDoor()
     {
         float t = 0f;

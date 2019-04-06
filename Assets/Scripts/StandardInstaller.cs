@@ -14,7 +14,6 @@ public class StandardInstaller : MonoInstaller
         Container.Bind<FirstPersonController>().FromInstance(fpControllerInstance).AsSingle();
         Container.Bind<ItemManager>().FromInstance(itemManager).AsSingle();
 
-        Container.Bind<ElevatorDoorController>().FromComponentInParents().AsTransient().WhenInjectedInto<Photocell>();
         Container.Bind<ElevatorDoorController>().FromComponentInChildren().AsTransient().WhenInjectedInto<ElevatorController>();
         Container.Bind<ElevatorController>().FromComponentInParents();
 
