@@ -14,10 +14,8 @@ public class Door : MonoBehaviour
 
     private void OnTriggerStay(Collider collider)
     {
-        print("triggered something");
         if (collider.GetComponent<PlayerActions>() && photocellEnabled) // auto opening works only for player, more universal aproach would be using for example layers or tags
         {
-            print("trigerred player");
             elevatorController.OpenElevatorDoors();
             photocellEnabled = false;
         }

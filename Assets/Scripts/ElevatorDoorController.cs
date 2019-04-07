@@ -11,9 +11,6 @@ public class ElevatorDoorController : MonoBehaviour
     //dependencies
     [Inject] private Animator[] doorAnimators;
 
-    //cached
-    private IEnumerator currentCoroutine;
-
     public void Open()
     {
         //do not proceed if doors already opening or opened
@@ -21,26 +18,22 @@ public class ElevatorDoorController : MonoBehaviour
 
         foreach (var door in doorAnimators)
         {
-            float t = 1f - door.GetCurrentAnimatorStateInfo(0).normalizedTime; //time of clip starting point
-            door.Play("Door Open", -1, Mathf.Clamp(t, 0f, 1f));
+            float t = 1f - Mathf.Clamp(door.GetCurrentAnimatorStateInfo(0).normalizedTime, 0f, 1f); //time of clip starting point
+            door.Play("Door Open", -1, t);
         }
-        currentCoroutine = AutoCloseDoor();
-        StartCoroutine(currentCoroutine);
+        StartCoroutine(AutoCloseDoor());
     }
 
     public void Close()
     {
-        if (currentCoroutine != null)
-        {
-            StopCoroutine(currentCoroutine); //if door closed by player disables autoclosing
-        }
+        StopAllCoroutines() ; //if door closed by player disables autoclosing
 
         if(doorAnimators[0].GetCurrentAnimatorStateInfo(0).IsName("Door Close")) { return; } // doors already closing or closed
 
         foreach (var door in doorAnimators)
         {
-            float t = 1f - door.GetCurrentAnimatorStateInfo(0).normalizedTime; //time of clip starting point
-            door.Play("Door Close", -1, Mathf.Clamp(t, 0f, 1f));
+            float t = 1f - Mathf.Clamp(door.GetCurrentAnimatorStateInfo(0).normalizedTime, 0f, 1f); //time of clip starting point
+            door.Play("Door Close", -1, t);
         }
     }
 
