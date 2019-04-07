@@ -12,23 +12,28 @@ public class ElevatorButtonsPanel : MonoBehaviour
     //dependencies
     [Inject] ElevatorController elevatorController;
     [Inject] ItemManager itemManager;
+    [Inject] ElevatorSounds elevatorSounds;
+    [Inject] AudioSource audioSource;
 
     public void OnFloorPushed(int floor)
     {
         elevatorController.GoToFloor(floor);
         itemManager.PutAwayItem();
+        elevatorSounds.PlaySoundFromDifferentAudioSource(Sound.button, audioSource);
     }
 
     public void OnDoorOpenPressed()
     {
         elevatorController.OpenElevatorDoors();
         itemManager.PutAwayItem();
+        elevatorSounds.PlaySoundFromDifferentAudioSource(Sound.button, audioSource);
     }
 
     public void OnDoorClosePressed()
     {
         elevatorController.CloseElevatorDoors();
         itemManager.PutAwayItem();
+        elevatorSounds.PlaySoundFromDifferentAudioSource(Sound.button, audioSource);
     }
 
     private void Update()

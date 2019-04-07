@@ -10,9 +10,12 @@ public class DoorButton : MonoBehaviour, IButton
 
     //dependencies
     [Inject] private ElevatorController elevator;
+    [Inject] private ElevatorSounds elevatorSounds;
+    [Inject] private AudioSource audioSource;
     
     public void EnableButton()
     {
+        elevatorSounds.PlaySoundFromDifferentAudioSource(Sound.button, audioSource);
         elevator.CallElevator(thisFloor);
     }
 }

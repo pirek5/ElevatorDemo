@@ -7,7 +7,7 @@ public enum Sound { elevatorMoves, button, elevatorBoing, doors }
 
 public class ElevatorSounds : MonoBehaviour
 {
-    [Inject] AudioSource audioSource;
+    [Inject] AudioSource _audioSource;
 
     public SoundAudioClip[] soundAudioClipArray;
 
@@ -20,14 +20,14 @@ public class ElevatorSounds : MonoBehaviour
 
     public void PlaySound(Sound sound)
     {
-        audioSource.Stop();
-        audioSource.clip = GetAudioClip(sound);
-        audioSource.Play();
+        _audioSource.Stop();
+        _audioSource.clip = GetAudioClip(sound);
+        _audioSource.Play();
     }
 
     public void StopSound()
     {
-        audioSource.Stop();
+        _audioSource.Stop();
     }
 
     public AudioClip GetAudioClip(Sound sound)
@@ -42,5 +42,11 @@ public class ElevatorSounds : MonoBehaviour
 
         Debug.LogError("Cant find sound!");
         return null;
+    }
+
+    public void PlaySoundFromDifferentAudioSource(Sound sound, AudioSource audioSource)
+    {
+        audioSource.clip = GetAudioClip(sound);
+        audioSource.Play();
     }
 }

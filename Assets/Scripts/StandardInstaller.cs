@@ -7,6 +7,7 @@ public class StandardInstaller : MonoInstaller
     [SerializeField] private PlayerState playerStateInstance;
     [SerializeField] private FirstPersonController fpControllerInstance;
     [SerializeField] private ItemManager itemManager;
+    [SerializeField] private AudioSource elevatorAudioSource;
 
     public override void InstallBindings()
     {
@@ -16,10 +17,11 @@ public class StandardInstaller : MonoInstaller
 
         Container.Bind<ElevatorDoorController>().FromComponentInChildren().AsTransient().WhenInjectedInto<ElevatorController>();
         Container.Bind<ElevatorController>().FromComponentInParents().AsTransient();
-        Container.Bind<ElevatorSounds>().FromComponentsInChildren().AsTransient().WhenInjectedInto<ElevatorController>();
-        Container.Bind<ElevatorSounds>().FromComponentsInParents().AsTransient().WhenInjectedInto<Door>();
+        Container.Bind<ElevatorSounds>().FromComponentSibling().AsTransient().WhenInjectedInto<ElevatorController>();
+        Container.Bind<ElevatorSounds>().FromComponentsInParents().AsTransient().WhenInjectedInto(typeof(Door), typeof(DoorButton), typeof(ElevatorButtonsPanel));
 
         Container.Bind<Animator>().FromComponentsInChildren().AsTransient().WhenInjectedInto<ElevatorDoorController>();
+        Container.Bind<AudioSource>().FromInstance(elevatorAudioSource).AsTransient().WhenInjectedInto<ElevatorSounds>();
         Container.Bind<AudioSource>().FromComponentSibling().AsTransient();
     }
 }

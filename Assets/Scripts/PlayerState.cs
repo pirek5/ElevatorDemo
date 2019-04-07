@@ -56,7 +56,6 @@ public class PlayerState : MonoBehaviour
     {
         if (other.CompareTag("elevator"))
         {
-            print("player in elevator");
             IsInElevator = true;
         }
     }
@@ -65,7 +64,6 @@ public class PlayerState : MonoBehaviour
     {
         if (other.CompareTag("elevator"))
         {
-            print("player outside elevator");
             IsInElevator = false;
         }
     }
