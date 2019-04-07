@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Photocell : MonoBehaviour
+public class Door : MonoBehaviour
 {
     //dependencies
     [Inject] private ElevatorController elevatorController;
+    [Inject] private ElevatorSounds elevatorSounds;
 
     //state
     private bool photocellEnabled;
 
     private void OnTriggerStay(Collider collider)
     {
+        print("triggered something");
         if (collider.GetComponent<PlayerActions>() && photocellEnabled) // auto opening works only for player, more universal aproach would be using for example layers or tags
         {
+            print("trigerred player");
             elevatorController.OpenElevatorDoors();
             photocellEnabled = false;
         }
@@ -22,6 +25,17 @@ public class Photocell : MonoBehaviour
 
     public void DoorOpening()
     {
+        elevatorSounds.PlaySound(Sound.doors);
+    }
+
+    public void DoorOpened()
+    {
+        elevatorSounds.StopSound();
+    }
+
+    public void DoorCloseing()
+    {
+        elevatorSounds.PlaySound(Sound.doors);
         photocellEnabled = true;
     }
 
@@ -29,6 +43,7 @@ public class Photocell : MonoBehaviour
     {
         photocellEnabled = false;
         elevatorController.EnableElevatorAutoBack();
+        elevatorSounds.StopSound();
     }
     
 }

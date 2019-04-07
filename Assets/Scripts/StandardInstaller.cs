@@ -16,7 +16,8 @@ public class StandardInstaller : MonoInstaller
 
         Container.Bind<ElevatorDoorController>().FromComponentInChildren().AsTransient().WhenInjectedInto<ElevatorController>();
         Container.Bind<ElevatorController>().FromComponentInParents().AsTransient();
-        Container.Bind<ElevatorSounds>().FromComponentsInChildren().AsTransient();
+        Container.Bind<ElevatorSounds>().FromComponentsInChildren().AsTransient().WhenInjectedInto<ElevatorController>();
+        Container.Bind<ElevatorSounds>().FromComponentsInParents().AsTransient().WhenInjectedInto<Door>();
 
         Container.Bind<Animator>().FromComponentsInChildren().AsTransient().WhenInjectedInto<ElevatorDoorController>();
         Container.Bind<AudioSource>().FromComponentSibling().AsTransient();

@@ -3,24 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
+public enum Sound { elevatorMoves, button, elevatorBoing, doors }
+
 public class ElevatorSounds : MonoBehaviour
 {
-    [SerializeField] private AudioClip elevatorBoing;
-    [SerializeField] private AudioClip elevatorRide;
-
     [Inject] AudioSource audioSource;
 
-    public void PlayBoing()
+    public SoundAudioClip[] soundAudioClipArray;
+
+    [System.Serializable]
+    public class SoundAudioClip
+    {
+        public Sound sound;
+        public AudioClip audioClip;
+    }
+
+    public void PlaySound(Sound sound)
     {
         audioSource.Stop();
-        audioSource.clip = elevatorBoing;
+        audioSource.clip = GetAudioClip(sound);
         audioSource.Play();
     }
 
-    public void PlayElevatorRide()
+    public void StopSound()
     {
         audioSource.Stop();
-        audioSource.clip = elevatorRide;
-        audioSource.Play();
+    }
+
+    public AudioClip GetAudioClip(Sound sound)
+    {
+        foreach (var soundAudioClip in soundAudioClipArray)
+        {
+            if (soundAudioClip.sound == sound)
+            {
+                return soundAudioClip.audioClip;
+            }
+        }
+
+        Debug.LogError("Cant find sound!");
+        return null;
     }
 }
