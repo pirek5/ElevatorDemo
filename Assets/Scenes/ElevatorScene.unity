@@ -1559,20 +1559,22 @@ PrefabInstance:
 
         Right Mouse Button to Cancel
 
+        Press "Escape" to quit application
+
 
         Press Right Mouse Button to close this information'
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 138
+      value: 173
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_margin.z
@@ -1584,11 +1586,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_margin.y
-      value: 21.596336
+      value: -59.29777
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_margin.w
-      value: 12.615715
+      value: -58.926414
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_fontSize
@@ -1600,11 +1602,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1291777937, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_firstOverflowCharacterIndex
-      value: 88
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2092643618, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1612,11 +1614,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2092643618, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 333.1
+      value: 272.5
       objectReference: {fileID: 0}
     - target: {fileID: 2092643618, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -707.5
+      value: -586.2
       objectReference: {fileID: 0}
     - target: {fileID: 1291777936, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
       propertyPath: m_AnchoredPosition.x

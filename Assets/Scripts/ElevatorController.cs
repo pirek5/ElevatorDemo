@@ -20,8 +20,8 @@ public class ElevatorController : MonoBehaviour
     public int CurrentFloor { get; private set; }
     public bool IsMoving { get; private set; }
     private bool elevatorCalled;
+    private bool elevatorBlocked;
     private IEnumerator elevatorMovementCoroutine;
-    private IEnumerator elevatorAutoBackCoroutine;
 
     //dependencies
     [Inject] private FirstPersonController firstPersonController;
@@ -53,10 +53,6 @@ public class ElevatorController : MonoBehaviour
     {
         if(floor == CurrentFloor || IsMoving) { return; }
 
-        if (elevatorAutoBackCoroutine != null)
-        {
-            StopCoroutine(elevatorAutoBackCoroutine);
-        }
         CloseElevatorDoors();
         elevatorMovementCoroutine = ElevatorMovement(elevator.localPosition, floorPositions[floor], floor);
         StartCoroutine(elevatorMovementCoroutine);
@@ -64,12 +60,13 @@ public class ElevatorController : MonoBehaviour
 
     IEnumerator ElevatorMovement(Vector3 startPos, Vector3 endPos, int floor)
     {
-        float t = 0f;
-        while(t< elevatorMoveDelay)
+        while (elevatorBlocked == true)
         {
-            t += Time.deltaTime;
             yield return null;
         }
+
+        StopCoroutine("ElevatorAutoBack");
+
 
         IsMoving = true;
         CurrentFloor = -1;
@@ -107,15 +104,6 @@ public class ElevatorController : MonoBehaviour
     {
         if(IsMoving) { return; }
         elevatorDoorController.Open();
-        if(elevatorAutoBackCoroutine != null)
-        {
-            StopCoroutine(elevatorAutoBackCoroutine);
-        }
-
-        if(elevatorMovementCoroutine != null)
-        {
-            StopCoroutine(elevatorMovementCoroutine); 
-        }
     }
 
     public void CloseElevatorDoors()
@@ -125,8 +113,7 @@ public class ElevatorController : MonoBehaviour
 
     public void EnableElevatorAutoBack()
     {
-        elevatorAutoBackCoroutine = ElevatorAutoBack();
-        StartCoroutine(elevatorAutoBackCoroutine);
+        StartCoroutine("ElevatorAutoBack");
     }
 
     private IEnumerator ElevatorAutoBack()
@@ -150,6 +137,22 @@ public class ElevatorController : MonoBehaviour
             yield return null;
         }
         GoToFloor(floor);
+    }
+
+    public void ElevatorBlocked()
+    {
+        elevatorBlocked = true;   
+        StopCoroutine("ElevatorAutoBack");
+        if (elevatorMovementCoroutine != null)
+        {
+            StopCoroutine(elevatorMovementCoroutine);
+        }
+    }
+
+    public void ElevatorUnblocked()
+    {
+        EnableElevatorAutoBack();
+        elevatorBlocked = false;
     }
 
 }

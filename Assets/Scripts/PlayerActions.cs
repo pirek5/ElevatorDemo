@@ -21,6 +21,11 @@ public class PlayerActions : MonoBehaviour
         {
             ItemActions();
         }
+
+        if (playerState.Quit)
+        {
+            QuitApplication();
+        }
     }
 
     private void MovementActions()
@@ -42,6 +47,12 @@ public class PlayerActions : MonoBehaviour
         {
             itemManager.PutAwayItem();
         }
+    }
+
+    private void QuitApplication()
+    {
+        Application.Quit();
+        Debug.Log("exit");
     }
 
 }

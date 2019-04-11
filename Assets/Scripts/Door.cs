@@ -24,6 +24,7 @@ public class Door : MonoBehaviour
     public void DoorOpening()
     {
         elevatorSounds.PlaySound(Sound.doors);
+        elevatorController.ElevatorBlocked();
     }
 
     public void DoorOpened()
@@ -40,7 +41,7 @@ public class Door : MonoBehaviour
     public void DoorClosed()
     {
         photocellEnabled = false;
-        elevatorController.EnableElevatorAutoBack();
+        elevatorController.ElevatorUnblocked();
         elevatorSounds.StopSound();
     }
     

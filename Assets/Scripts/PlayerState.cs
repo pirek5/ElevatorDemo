@@ -16,12 +16,10 @@ public class PlayerState : MonoBehaviour
     public State CurrentState { get; set; }
     public bool Action { get; private set; }
     public bool Cancel { get; private set; }
+    public bool Quit { get; private set; }
     public bool IsInElevator { get; private set; }
     public GameObject SelectedObject { get; private set; }
 
-
-    //cached
-    //private RaycastHit hit;
 
     private void Awake()
     {
@@ -50,6 +48,7 @@ public class PlayerState : MonoBehaviour
 
         Action = Input.GetButtonDown("Fire1");
         Cancel = Input.GetButtonDown("Cancel");
+        Quit = Input.GetButtonDown("Fire2");
     }
 
     private void OnTriggerEnter(Collider other)
